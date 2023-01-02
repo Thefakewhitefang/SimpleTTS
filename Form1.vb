@@ -1,4 +1,7 @@
-﻿Public Class Form1
+Public Class Form1
+
+    'Declaring variables for each button click is inefficent as most of the variables are same so I can delcare them here instead.
+    'But I am lazy, so not going to improve.
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
@@ -14,9 +17,14 @@
         Dim Voice As Object
         Dim File As String
         Username = Environ("userprofile")
+        'Username is an environment variable which includes the path
+        'For example, if the username is "user" the string stored will be:
+        ' "C:/Users/user"
         Voice = CreateObject("sapi.spvoice")
         Me.TextBox1.Text = ""
+        'Emptying so the TTS doesn't read the text entered previously
 
+        'Configuring the Open File Dialog-box
         OpenFileDialog1.Multiselect = False
         OpenFileDialog1.InitialDirectory = Username & "/Documents"
         OpenFileDialog1.Filter = "Text Document (*.txt)|*.txt| All files (*.*)|*.*"
@@ -33,26 +41,12 @@
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
-        Form2.Show()
+        'Right click menu
+        Form2.ShowDialog()
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-
+        'Save as file dialog
         Form3.ShowDialog()
-        'Dim Voice As Object
-        'Dim Output As Object
-        'Dim Username As String
-        'Const SSFMCreateForWrite = 3
-
-        'Username = Environ("userprofile")
-        'Voice = CreateObject("sapi.spvoice")
-        'Output = CreateObject("sapi.spfilestream")
-
-        'Output.Open(Username & "/Documents/Speech.wav", SSFMCreateForWrite, False)
-        'Voice.AudioOutputStream = Output
-        'Voice.speak(Me.TextBox1.Text)
-        'Output.close()
-        'MsgBox("Output saved in " & Username & "\Documents\Speech.wav")
-
     End Sub
 End Class
